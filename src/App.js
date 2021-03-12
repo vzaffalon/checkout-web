@@ -1,4 +1,4 @@
-import { Tab, Tabs, GridList, GridListTile, GridListTileBar, ListSubheader, TabPanel } from "@material-ui/core";
+import { Tab, Tabs, GridList, GridListTile, GridListTileBar } from "@material-ui/core";
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -9,8 +9,9 @@ import styled from 'styled-components';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ReplayIcon from '@material-ui/icons/Replay';
 
-const Col = styled.div`
+const ButtonsGroup = styled.div`
     flex-direction: column;
+    width: 150px;
 `
 
 const Flex = styled.div`
@@ -23,24 +24,36 @@ const Row = styled.div`
 
 const CancelButton = styled.div`
   background: #303b41;
-  height: 200px;
+  height: 60px;
+  display: flex;
   flex-direction: row;
+  color: white;
   align-items: center;
   justify-content: center;
 `
 
 const OrderButton = styled.div`
   background: #394752;
-  height: 300px;
+  height: 180px;
+  display: flex;
+  color: white;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+`
+
+const OrderItemListContainer = styled.ul`
+  width: 192px;
+  height: 220px;
+  overflow:hidden; 
+  overflow-y:scroll;
 `
 
 function App() {
   const [selectedTab, setSelectedTab] = useState(0)
   const [items, setItems] = useState([])
   const [categories, setCategories] = useState([])
+  const [orderItems, setOrderItems] = useState([])
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue)
@@ -55,6 +68,9 @@ function App() {
 
   const getCategories = () => {
     Category.list().then(response => {
+      if (!categories.length) {
+        getItems(response.data[0].category_id)
+      }
       setCategories(response.data)
     })
   }
@@ -72,7 +88,7 @@ function App() {
       backgroundColor: theme.palette.background.paper,
     },
     gridList: {
-      height: 350,
+      height: 530,
     },
   }));
 
@@ -82,8 +98,7 @@ function App() {
     return (<GridList cellHeight={140} className={classes.gridList}>
       {items.map((item) => {
         const imgUri = bucketUri + item.image_id + ".jpg"
-        console.log(imgUri)
-        return(<GridListTile key={item.id}>
+        return (<GridListTile onClick={() => { setOrderItems([...orderItems, item]) }} key={item.id}>
           <img src={imgUri} alt={"title"} />
           <GridListTileBar
             title={item.name}
@@ -93,12 +108,21 @@ function App() {
             }
           />
         </GridListTile>)
-  })}
+      })}
     </GridList>)
   }
 
   const OrderItemsList = () => {
-    return <div></div>
+    if(!orderItems.length){
+      return <p>Add your first item by clicking in a product</p>
+    }
+    return <OrderItemListContainer>{orderItems.map((item) => {
+      return (<li>
+        <p>{item.name}</p>
+        <p>{item.price}</p>
+        <p>{item.quantity}</p>
+      </li>)
+    })}</OrderItemListContainer>
   }
 
   return (
@@ -116,17 +140,19 @@ function App() {
         </Tabs>
         <ItemsList></ItemsList>
         <Flex>
-          <Col>
+          <div>
             <OrderItemsList></OrderItemsList>
-          </Col>
-          <Col>
-            <CancelButton>
+          </div>
+          <ButtonsGroup>
+            <CancelButton onClick={() => { setOrderItems([]) }}>
               <ReplayIcon></ReplayIcon>
+              <p>Cancel</p>
             </CancelButton>
             <OrderButton>
               <ShoppingCartIcon></ShoppingCartIcon>
+              <p>Order</p>
             </OrderButton>
-          </Col>
+          </ButtonsGroup>
         </Flex>
       </div>
     </MuiThemeProvider>
