@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from "./theme.js"
 import bucketUri from "./utils/s3-bucket.js"
-import { Item, Category, Order } from './models/index.js';
+import { Item, Category } from './models/index.js';
 import styled from 'styled-components';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ReplayIcon from '@material-ui/icons/Replay';
@@ -47,13 +47,21 @@ const OrderItemListContainer = styled.ul`
   height: 220px;
   overflow:hidden; 
   overflow-y:scroll;
+  list-style-type: none;
 `
+
+const DefaultCategory = {
+  id: null,
+  name: "All",
+}
 
 function App() {
   const [selectedTab, setSelectedTab] = useState(0)
   const [items, setItems] = useState([])
-  const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState([DefaultCategory])
   const [orderItems, setOrderItems] = useState([])
+
+  console.log(categories)
 
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue)
@@ -61,22 +69,22 @@ function App() {
   }
 
   const getItems = (category_id) => {
-    Item.list({ category_id: category_id }).then(response => {
+    const params = category_id ? { category_id: category_id } : null
+    Item.list(params).then(response => {
       setItems(response.data)
     })
   }
 
   const getCategories = () => {
     Category.list().then(response => {
-      if (!categories.length) {
-        getItems(response.data[0].category_id)
-      }
-      setCategories(response.data)
+      debugger;
+      setCategories([...categories,...response.data])
     })
   }
 
   useEffect(() => {
     getCategories();
+    getItems();
   }, []);
 
   const useStyles = makeStyles((theme) => ({
@@ -92,13 +100,25 @@ function App() {
     },
   }));
 
+  const GenerateNewOrderItems = (item) => {
+      let foundEqual = false;
+      const newOrderItems = orderItems.map((orderItem) => {
+        if(orderItem.id === item.id){
+          orderItem.quantity += 1;
+          foundEqual = true;
+        }
+        return orderItem
+      })
+      return foundEqual ? newOrderItems : [...newOrderItems, item]
+  }
+
   const ItemsList = () => {
     const classes = useStyles();
 
     return (<GridList cellHeight={140} className={classes.gridList}>
       {items.map((item) => {
         const imgUri = bucketUri + item.image_id + ".jpg"
-        return (<GridListTile onClick={() => { setOrderItems([...orderItems, item]) }} key={item.id}>
+        return (<GridListTile onClick={() => { setOrderItems(GenerateNewOrderItems(item)) }} key={item.id}>
           <img src={imgUri} alt={"title"} />
           <GridListTileBar
             title={item.name}
@@ -123,6 +143,14 @@ function App() {
         <p>{item.quantity}</p>
       </li>)
     })}</OrderItemListContainer>
+  }
+
+  const CalculateTotalPrice = () => {
+      let totalPrice = 0
+      for (var orderItem in orderItems) {
+        totalPrice += orderItem.price * orderItem.quantity
+      }
+      return totalPrice.toFixed(2)
   }
 
   return (
@@ -151,6 +179,7 @@ function App() {
             <OrderButton>
               <ShoppingCartIcon></ShoppingCartIcon>
               <p>Order</p>
+              <p>$ {CalculateTotalPrice()}</p>
             </OrderButton>
           </ButtonsGroup>
         </Flex>
