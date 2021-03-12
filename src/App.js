@@ -1,10 +1,41 @@
-import { Tab, Tabs, GridList, GridListTile, GridListTileBar, ListSubheader } from "@material-ui/core";
+import { Tab, Tabs, GridList, GridListTile, GridListTileBar, ListSubheader, TabPanel } from "@material-ui/core";
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from "./theme.js"
 import bucketUri from "./utils/s3-bucket.js"
 import { Item, Category, Order } from './models/index.js';
+import styled from 'styled-components';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import ReplayIcon from '@material-ui/icons/Replay';
+
+const Col = styled.div`
+    flex-direction: column;
+`
+
+const Flex = styled.div`
+  display: flex;
+`
+
+const Row = styled.div`
+  flex-direction: row;
+`
+
+const CancelButton = styled.div`
+  background: #303b41;
+  height: 200px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`
+
+const OrderButton = styled.div`
+  background: #394752;
+  height: 300px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
 
 function App() {
   const [selectedTab, setSelectedTab] = useState(0)
@@ -41,24 +72,19 @@ function App() {
       backgroundColor: theme.palette.background.paper,
     },
     gridList: {
-      width: 500,
-      height: 450,
-    },
-    icon: {
-      color: 'rgba(255, 255, 255, 0.54)',
+      height: 350,
     },
   }));
 
   const ItemsList = () => {
     const classes = useStyles();
 
-    return (<GridList cellHeight={180} className={classes.gridList}>
-      <GridListTile key="Subheader" cols={3} style={{ height: 'auto' }}>
-        <ListSubheader component="div">December</ListSubheader>
-      </GridListTile>
-      {items.map((item) => (
-        <GridListTile key={item.id}>
-          <img src={bucketUri + item.image_id + ".jpg"} alt={"title"} />
+    return (<GridList cellHeight={140} className={classes.gridList}>
+      {items.map((item) => {
+        const imgUri = bucketUri + item.image_id + ".jpg"
+        console.log(imgUri)
+        return(<GridListTile key={item.id}>
+          <img src={imgUri} alt={"title"} />
           <GridListTileBar
             title={item.name}
             subtitle={<span>$ {item.price}</span>}
@@ -66,9 +92,13 @@ function App() {
               <div></div>
             }
           />
-        </GridListTile>
-      ))}
+        </GridListTile>)
+  })}
     </GridList>)
+  }
+
+  const OrderItemsList = () => {
+    return <div></div>
   }
 
   return (
@@ -82,11 +112,22 @@ function App() {
           variant="fullWidth"
           aria-label="disabled tabs example"
         >
-          {categories.map((category) => <Tab label={category.name} >
-            <ItemsList></ItemsList>
-          </Tab>)
-          }
+          {categories.map((category) => <Tab label={category.name} ></Tab>)}
         </Tabs>
+        <ItemsList></ItemsList>
+        <Flex>
+          <Col>
+            <OrderItemsList></OrderItemsList>
+          </Col>
+          <Col>
+            <CancelButton>
+              <ReplayIcon></ReplayIcon>
+            </CancelButton>
+            <OrderButton>
+              <ShoppingCartIcon></ShoppingCartIcon>
+            </OrderButton>
+          </Col>
+        </Flex>
       </div>
     </MuiThemeProvider>
   );
