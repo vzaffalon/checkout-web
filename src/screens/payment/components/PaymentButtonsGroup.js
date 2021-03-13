@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from "react";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ReplayIcon from "@material-ui/icons/Replay";
-import { CancelButton, OrderButton, ButtonsGroup } from "../styled/OrderButtonsGroupStyled"
-import { CalculateTotalPrice } from "../services/OrderService"
+import { CancelButton, PayButton, ButtonsGroup } from "../styled/PaymentButtonsGroupStyled"
+import { CalculateTotalPrice } from "../../checkout/services/OrderService"
 import { useHistory } from "react-router-dom"
 
-function OrderButtonsGroup({orderItems, setOrderItems}) {
+function PaymentButtonsGroup({orderItems, pay}) {
   let history = useHistory();
 
-  const goToPaymentScreen = () => {
-      history.push("/payment", {orderItems: orderItems})
+  const cancelPayment = () => {
+      history.goBack()
   }
 
   return (
     <ButtonsGroup>
       <CancelButton
         onClick={() => {
-          setOrderItems([]);
+            cancelPayment();
         }}
       >
         <ReplayIcon></ReplayIcon>
-        <p>Cancel</p>
+        <p>Cancel Payment</p>
       </CancelButton>
-      <OrderButton onClick={() => {goToPaymentScreen()}}>
+      <PayButton type="submit">
         <ShoppingCartIcon></ShoppingCartIcon>
-        <p>Order</p>
+        <p>Pay</p>
         <p>$ {CalculateTotalPrice(orderItems)}</p>
-      </OrderButton>
+      </PayButton>
     </ButtonsGroup>
   );
 };
 
-export default OrderButtonsGroup;
+export default PaymentButtonsGroup;

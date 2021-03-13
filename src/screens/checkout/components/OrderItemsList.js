@@ -1,5 +1,5 @@
 import React from "react";
-import { OrderItemListContainer } from "../styled/OrderItemListStyled"
+import { OrderItemListContainer, ItemInfo } from "../styled/OrderItemListStyled"
 
 const OrderItemsList = ({orderItems}) => {
   return (
@@ -10,9 +10,13 @@ const OrderItemsList = ({orderItems}) => {
         orderItems.map((item) => {
           return (
             <li>
-              <p>{item.name}</p>
-              <p>{item.price}</p>
-              <p>{item.quantity}</p>
+              <ItemInfo>
+                <div>
+                  <div>{item.name}</div>
+                  <div>{item.quantity}x</div>
+                </div>
+                <div>$ {item.price}</div>
+              </ItemInfo>
             </li>
           );
         })

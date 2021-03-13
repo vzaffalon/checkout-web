@@ -10,7 +10,18 @@ const OrderItemListContainer = styled.div`
   list-style-type: none;
 `;
 
+const ItemInfo = styled.div`
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  display: flex;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-top: 15px;
+`;
+
 
 export {
-    OrderItemListContainer
+    OrderItemListContainer,
+    ItemInfo
 }
