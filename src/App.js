@@ -93,8 +93,6 @@ function App() {
   const [categories, setCategories] = useState([DefaultCategory]);
   const [orderItems, setOrderItems] = useState([]);
 
-  console.log(categories);
-
   const handleChange = (event, newValue) => {
     setSelectedTab(newValue);
     getItems(categories[newValue].id);
@@ -134,12 +132,14 @@ function App() {
   const GenerateNewOrderItems = (item) => {
     let foundEqual = false;
     const newOrderItems = orderItems.map((orderItem) => {
+      let newOrderItem = Object.assign({}, orderItem);
       if (orderItem.id === item.id) {
-        orderItem.quantity += 1;
+        newOrderItem.quantity = newOrderItem.quantity + 1;
         foundEqual = true;
       }
-      return orderItem;
+      return newOrderItem;
     });
+    item.quantity = 1
     return foundEqual ? newOrderItems : [...newOrderItems, item];
   };
 
@@ -192,9 +192,10 @@ function App() {
 
   const CalculateTotalPrice = () => {
     let totalPrice = 0;
-    for (var orderItem in orderItems) {
-      totalPrice += orderItem.price * orderItem.quantity;
-    }
+    orderItems.map((orderItem) => {
+      totalPrice = totalPrice + (orderItem.price * orderItem.quantity);
+    })
+    console.log(totalPrice)
     return totalPrice.toFixed(2);
   };
 
