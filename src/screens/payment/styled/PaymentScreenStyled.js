@@ -12,6 +12,7 @@ const Flex = styled.div`
 const CreditCardFormContainer  = styled.div`
     height: 420px;
     background: #394752;
+    overflow-y: scroll;
 `
 
 const PaymentHeader = styled.h2`
