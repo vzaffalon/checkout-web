@@ -1,7 +1,7 @@
 import api from './ApiConsts.js';
 import axios from 'axios';
 
-const model_uri = "categories/"
+const model_uri = "categories"
 
 const list = async (params) => {
     return new Promise(async (resolve, reject) => {
