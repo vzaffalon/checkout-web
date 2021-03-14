@@ -20,6 +20,7 @@ const ItemsList = ({ items, orderItems, setOrderItems }) => {
           >
             <img src={imgUri} alt={"title"} />
             <GridListTileBar
+              data-testid="category-items"
               title={item.name}
               subtitle={<span>$ {item.price}</span>}
               actionIcon={<div></div>}

@@ -17,7 +17,6 @@ const CalculateTotalPrice = (orderItems) => {
     orderItems.map((orderItem) => {
       totalPrice = totalPrice + orderItem.price * orderItem.quantity;
     });
-    console.log(totalPrice);
     return totalPrice.toFixed(2);
   };
 

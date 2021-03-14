@@ -5,11 +5,11 @@ const OrderItemsList = ({orderItems}) => {
   return (
     <OrderItemListContainer>
       {!orderItems.length ? (
-        <p>Add your first item by clicking in a product</p>
+        <p style={{textAlign: "center"}}>Add your first item by clicking in a product</p>
       ) : (
         orderItems.map((item) => {
           return (
-            <li>
+            <li data-testid="order-items">
               <ItemInfo>
                 <div>
                   <div>{item.name}</div>

@@ -10,6 +10,5 @@ const create = async (payload) => {
 }
 
 export default { 
-    list,
     create,
 }

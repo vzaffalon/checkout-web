@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom"
 function PaymentConfirmedScreen() {
  let history = useHistory();
   return (
-    <ConfirmedBackground>
+    <ConfirmedBackground data-testid="confirmation-screen">
       <ConfirmedHeader>Order Created</ConfirmedHeader>
       <ConfirmedPaymentHeader>Payment Completed With Success</ConfirmedPaymentHeader>
       <StartOtherOrderButton onClick={() => {history.replace("/")}}>Start another order</StartOtherOrderButton>

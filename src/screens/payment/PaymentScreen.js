@@ -42,7 +42,7 @@ function PaymentScreen() {
   };
 
   return (
-    <PaymentContainer>
+    <PaymentContainer data-testid="payment-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreditCardFormContainer>
           <PaymentHeader>Insert your credit card data</PaymentHeader>

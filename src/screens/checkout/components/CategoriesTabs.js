@@ -12,7 +12,7 @@ function CategoriesTabs({ categories, selectedTab, handleChange }) {
       TabIndicatorProps={{style: {background:'#ffffff'}}}
     >
       {categories.map((category) => (
-        <Tab label={category.name}></Tab>
+        <Tab data-testid="category-tabs" label={category.name}></Tab>
       ))}
     </Tabs>
   );
