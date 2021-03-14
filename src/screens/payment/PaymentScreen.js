@@ -11,7 +11,7 @@ import {
 } from "./styled/PaymentScreenStyled";
 import { Order } from "../../models/index.js";
 import { useForm } from "react-hook-form";
-import CreditCardForm from "./components/CreditCardForm"
+import CreditCardForm from "./components/CreditCardForm";
 
 function PaymentScreen() {
   let history = useHistory();
@@ -21,20 +21,20 @@ function PaymentScreen() {
   const { register, handleSubmit, watch, errors } = useForm();
 
   const onSubmit = (data) => {
-    pay(data)
-  }
+    pay(data);
+  };
 
   const pay = (data) => {
     const orderItemsParams = orderItems.map((orderItem) => {
-        let orderItemParam = {
-            item_id: orderItem.id,
-            quantity: orderItem.quantity
-        }
-        return orderItemParam
-    })
+      let orderItemParam = {
+        item_id: orderItem.id,
+        quantity: orderItem.quantity,
+      };
+      return orderItemParam;
+    });
     const params = {
-        order_items: orderItemsParams,
-        payment: data
+      order_items: orderItemsParams,
+      payment: data,
     };
     Order.create(params).then((response) => {
       history.push("/payment_confirmed");
@@ -46,7 +46,7 @@ function PaymentScreen() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreditCardFormContainer>
           <PaymentHeader>Insert your credit card data</PaymentHeader>
-          <CreditCardForm register={register} errors={errors}/>
+          <CreditCardForm register={register} errors={errors} />
         </CreditCardFormContainer>
         <Flex>
           <OrderItemsList orderItems={orderItems} />

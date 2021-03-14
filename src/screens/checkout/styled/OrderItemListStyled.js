@@ -20,8 +20,4 @@ const ItemInfo = styled.div`
   margin-top: 15px;
 `;
 
-
-export {
-    OrderItemListContainer,
-    ItemInfo
-}
+export { OrderItemListContainer, ItemInfo };

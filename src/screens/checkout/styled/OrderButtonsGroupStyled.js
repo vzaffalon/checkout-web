@@ -25,8 +25,4 @@ const OrderButton = styled.div`
   justify-content: center;
 `;
 
-export {
-  ButtonsGroup,
-  CancelButton,
-  OrderButton,
-};
+export { ButtonsGroup, CancelButton, OrderButton };

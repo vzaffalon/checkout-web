@@ -1,14 +1,14 @@
-import api from './ApiConsts.js';
-import axios from 'axios';
+import api from "./ApiConsts.js";
+import axios from "axios";
 
-const model_uri = "orders"
+const model_uri = "orders";
 
 const create = async (payload) => {
-    return new Promise(async (resolve, reject) => {
-        resolve(axios.post(`${api.uri}${model_uri}`,payload));
-    });
-}
+  return new Promise(async (resolve, reject) => {
+    resolve(axios.post(`${api.uri}${model_uri}`, payload));
+  });
+};
 
-export default { 
-    create,
-}
+export default {
+  create,
+};

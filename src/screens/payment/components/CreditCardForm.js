@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import {
-    PaymentInput,
-} from "../styled/PaymentScreenStyled";
+import { PaymentInput } from "../styled/PaymentScreenStyled";
 
-function CreditCardForm({register, errors}) {
+function CreditCardForm({ register, errors }) {
   return (
     <>
       <PaymentInput>
@@ -51,7 +49,12 @@ function CreditCardForm({register, errors}) {
 
       <PaymentInput>
         <label for="cvv">CVV</label>
-        <input name="cvv" ref={register({ required: true })} label="cvv" placeholder="444" />
+        <input
+          name="cvv"
+          ref={register({ required: true })}
+          label="cvv"
+          placeholder="444"
+        />
         {errors.cvv && <span>This field is required</span>}
       </PaymentInput>
     </>

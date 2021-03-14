@@ -9,7 +9,7 @@ function CategoriesTabs({ categories, selectedTab, handleChange }) {
       onChange={handleChange}
       variant="fullWidth"
       aria-label="disabled tabs example"
-      TabIndicatorProps={{style: {background:'#ffffff'}}}
+      TabIndicatorProps={{ style: { background: "#ffffff" } }}
     >
       {categories.map((category) => (
         <Tab data-testid="category-tabs" label={category.name}></Tab>

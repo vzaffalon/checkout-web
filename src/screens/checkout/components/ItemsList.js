@@ -1,8 +1,8 @@
 import { GridList, GridListTile, GridListTileBar } from "@material-ui/core";
 import React from "react";
 import bucketUri from "../../../utils/s3-bucket.js";
-import useStyles from "../../../utils/material-ui-theme"
-import { UpdateOrderItems } from "../services/OrderService.js"
+import useStyles from "../../../utils/material-ui-theme";
+import { UpdateOrderItems } from "../services/OrderService.js";
 
 const ItemsList = ({ items, orderItems, setOrderItems }) => {
   const classes = useStyles();

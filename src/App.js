@@ -6,7 +6,7 @@ import {
   CheckoutContainer,
   CheckoutContainerContent,
 } from "./AppStyled";
-import MainRouter from "./routers/MainRouter"
+import MainRouter from "./routers/MainRouter";
 
 function App() {
   return (

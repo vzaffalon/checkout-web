@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ReplayIcon from "@material-ui/icons/Replay";
-import { CancelButton, PayButton, ButtonsGroup } from "../styled/PaymentButtonsGroupStyled"
-import { CalculateTotalPrice } from "../../checkout/services/OrderService"
-import { useHistory } from "react-router-dom"
+import {
+  CancelButton,
+  PayButton,
+  ButtonsGroup,
+} from "../styled/PaymentButtonsGroupStyled";
+import { CalculateTotalPrice } from "../../checkout/services/OrderService";
+import { useHistory } from "react-router-dom";
 
-function PaymentButtonsGroup({orderItems, pay}) {
+function PaymentButtonsGroup({ orderItems, pay }) {
   let history = useHistory();
 
   const cancelPayment = () => {
-      history.goBack()
-  }
+    history.goBack();
+  };
 
   return (
     <ButtonsGroup>
       <CancelButton
         onClick={() => {
-            cancelPayment();
+          cancelPayment();
         }}
       >
         <ReplayIcon></ReplayIcon>
@@ -29,6 +33,6 @@ function PaymentButtonsGroup({orderItems, pay}) {
       </PayButton>
     </ButtonsGroup>
   );
-};
+}
 
 export default PaymentButtonsGroup;

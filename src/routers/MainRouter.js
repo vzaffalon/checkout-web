@@ -7,19 +7,19 @@ import PaymentConfirmedScreen from "../screens/payment/PaymentConfirmedScreen";
 function MainRouter() {
   return (
     <Router>
-        <Switch>
-          <Route exact path="/">
-            <CheckoutScreen />
-          </Route>
-          <Route exact path="/payment">
-            <PaymentScreen />
-          </Route>
-          <Route exact path="/payment_confirmed">
-            <PaymentConfirmedScreen />
-          </Route>
-        </Switch>
+      <Switch>
+        <Route exact path="/">
+          <CheckoutScreen />
+        </Route>
+        <Route exact path="/payment">
+          <PaymentScreen />
+        </Route>
+        <Route exact path="/payment_confirmed">
+          <PaymentConfirmedScreen />
+        </Route>
+      </Switch>
     </Router>
   );
 }
 
-export default MainRouter
+export default MainRouter;

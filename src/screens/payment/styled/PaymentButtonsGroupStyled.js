@@ -26,8 +26,4 @@ const PayButton = styled.button`
   justify-content: center;
 `;
 
-export {
-  ButtonsGroup,
-  CancelButton,
-  PayButton,
-};
+export { ButtonsGroup, CancelButton, PayButton };

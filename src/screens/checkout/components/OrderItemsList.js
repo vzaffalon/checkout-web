@@ -1,11 +1,16 @@
 import React from "react";
-import { OrderItemListContainer, ItemInfo } from "../styled/OrderItemListStyled"
+import {
+  OrderItemListContainer,
+  ItemInfo,
+} from "../styled/OrderItemListStyled";
 
-const OrderItemsList = ({orderItems}) => {
+const OrderItemsList = ({ orderItems }) => {
   return (
     <OrderItemListContainer>
       {!orderItems.length ? (
-        <p style={{textAlign: "center"}}>Add your first item by clicking in a product</p>
+        <p style={{ textAlign: "center" }}>
+          Add your first item by clicking in a product
+        </p>
       ) : (
         orderItems.map((item) => {
           return (

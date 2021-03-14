@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Item, Category } from "../../models/index.js";
 import CategoriesTabs from "./components/CategoriesTabs";
 import ItemsList from "./components/ItemsList";
-import OrderButtonsGroup from "./components/OrderButtonsGroup"
-import OrderItemsList from "./components/OrderItemsList"
-import { Flex } from "./styled/CheckoutScreenStyled"
+import OrderButtonsGroup from "./components/OrderButtonsGroup";
+import OrderItemsList from "./components/OrderItemsList";
+import { Flex } from "./styled/CheckoutScreenStyled";
 
 const DefaultCategory = {
   id: null,
@@ -42,11 +42,22 @@ function CheckoutScreen() {
 
   return (
     <>
-      <CategoriesTabs categories={categories} selectedTab={selectedTab} handleChange={handleChange} />
-      <ItemsList items={items} orderItems={orderItems} setOrderItems={setOrderItems}/>
+      <CategoriesTabs
+        categories={categories}
+        selectedTab={selectedTab}
+        handleChange={handleChange}
+      />
+      <ItemsList
+        items={items}
+        orderItems={orderItems}
+        setOrderItems={setOrderItems}
+      />
       <Flex>
-        <OrderItemsList orderItems={orderItems}/>
-        <OrderButtonsGroup orderItems={orderItems} setOrderItems={setOrderItems}/>
+        <OrderItemsList orderItems={orderItems} />
+        <OrderButtonsGroup
+          orderItems={orderItems}
+          setOrderItems={setOrderItems}
+        />
       </Flex>
     </>
   );

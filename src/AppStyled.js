@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import tablet from "./images/portrait_black.png"
+import tablet from "./images/portrait_black.png";
 
 const AppBackground = styled.div`
   background: #394752c7;
@@ -23,8 +23,4 @@ const CheckoutContainer = styled.div`
 const CheckoutContainerContent = styled.div`
   width: 550px;
 `;
-export {
-  AppBackground,
-  CheckoutContainer,
-  CheckoutContainerContent,
-};
+export { AppBackground, CheckoutContainer, CheckoutContainerContent };

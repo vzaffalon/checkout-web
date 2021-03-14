@@ -8,7 +8,4 @@ const Row = styled.div`
   flex-direction: row;
 `;
 
-export {
-  Flex,
-  Row,
-};
+export { Flex, Row };
