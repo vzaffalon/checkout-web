@@ -106,12 +106,6 @@ describe('CheckoutFlow', () => {
       );
     })
     userEvent.click(screen.getByText('Pay'));
-
-    await waitFor(() => {
-      expect(
-        screen.getByTestId('confirmation-screen'),
-      ).not.toBeInTheDocument();
-    });
   });
 
 });
