@@ -1,7 +1,7 @@
 # checkout-web
 
 ### Description
-Client that use the checkout-api to show a restaurant menu with a list of items to select from a list of categories and to create a order inserting credit card data.
+Client that uses the checkout-api to show a restaurant menu, with a list of items to select from a list of categories, and that creates an order by inserting credit card data.
 
 ## Menu Selection
 <img width="777" alt="Captura de Tela 2021-03-14 às 11 29 00" src="https://user-images.githubusercontent.com/14209823/111072275-9abf2880-84b8-11eb-87bc-8567a2ff058f.png">
