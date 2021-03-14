@@ -35,4 +35,4 @@ react hook forms for form validation
 
 react router dom for application routing
 
-styled components for create components with custom styles
+styled components for creating components with custom styles
